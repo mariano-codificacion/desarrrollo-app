@@ -1,6 +1,6 @@
 export const colors = {
-    teal900: '#040D12',
-    teal600: '#183D3D',
-    teal400: '#183D3D',
-    teal200: '#93B1A6'
+    teal900: '#5F5D9C',
+    teal600: '#6196A6',
+    teal400: '#A4CE95',
+    teal200: '#F4EDCC'
 }
