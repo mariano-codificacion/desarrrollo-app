@@ -1,12 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { colors } from '../constants/colors';
-import Card from './Card';
+import { Pressable, StyleSheet, Text} from "react-native"
+import React from "react"
+import { colors } from "../constants/colors"
+import Card from "./Card"
 
-const CategoryItem = ({ category }) => {
+const CategoryItem = ({ category, selectCategory = () => {} }) => {
   return (
-    <Card>
-      <Text style={styles.text}>{category}</Text>
+    <Card style={{ marginVertical: 10, marginHorizontal: 10 }}>
+      <Pressable onPress={ () => selectCategory (category) }>
+        <Text style={styles.text}>{category}</Text>
+      </Pressable>
     </Card>
   )
 }

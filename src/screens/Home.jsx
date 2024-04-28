@@ -1,17 +1,22 @@
-import { StyleSheet, Text, View } from "react-native"
+import { FlatList, StyleSheet, View } from "react-native"
 import { colors } from "../constants/colors"
 import CategoryItem from "../components/CategoryItem"
 import categories from "../data/categories.json"
-import { FlatList } from "react-native-web"
 
-const Home = () => {
+const Home = ({setCategorySelected}) => {
+  
   return (
     <View style={styles.flatListContainer}>
       <FlatList
-       showsVerticalScrollIndicator={false}
-       keyExtractor={item =>item}
-       data={categories}
-       renderItem = {({item}) => <CategoryItem category={item}/>}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(elemntoDeMiArray) => elemntoDeMiArray}
+        data={categories.sort()}
+        renderItem={({ item }) => (
+          <CategoryItem 
+            selectCategory={setCategorySelected} 
+            category={item} 
+          />
+        )}
       />
     </View>
   )
