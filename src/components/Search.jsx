@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     gap: 18,
   },
   input: {
+    margin: 20,
     width: 220,
     padding: 8,
     fontSize: 15,

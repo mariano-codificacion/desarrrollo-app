@@ -9,7 +9,7 @@ const ProductItem = ({ product }) => {
     >
       <Text style={styles.textCategory}>{product.title}</Text>
       <Image
-        resizeMode = 'cover'
+        resizeMode = 'contain'
         style={styles.image}
         source={{ uri: product.images[0] }}
       />
@@ -21,19 +21,20 @@ export default ProductItem
 
 const styles = StyleSheet.create({
   image: {
-    height: 100,
-    width: 80,
+    height: 200,
+    width: 200,
     borderRadius: 15,
   },
   additionalStylesCard: {
     paddingLeft: 10,
-    flexDirection: 'row',
-    height: 100,
+    flexDirection: 'column',
+    height: 300,
     width: 300,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     margin: 10,
+    borderRadius: 15,
   },
   textCategory: {
-    color: colors.teal400
+    color: colors.platinum,
   }
 })

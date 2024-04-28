@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 
   flatListContainer: {
     width: '100%',
-    backgroundColor: colors.teal600,
+    backgroundColor: colors.platinum,
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',

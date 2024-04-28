@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     flex: 1,
     alignItems: "center",
-    backgroundColor: colors.teal200,
+    backgroundColor: colors.teal600,
   },
 })
 
