@@ -37,10 +37,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    gap: 18,
+    gap: 15,
   },
   input: {
-    margin: 20,
+    marginBottom: 10,
     width: 220,
     padding: 8,
     fontSize: 15,

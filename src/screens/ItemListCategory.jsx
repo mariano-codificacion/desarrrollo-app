@@ -5,7 +5,9 @@ import { colors } from '../constants/colors'
 import { useState, useEffect } from 'react'
 import Search from '../components/Search'
 
-const ItemListCategory = ({ categorySelected = "", setCategorySelected = () => { } }) => {
+const ItemListCategory = ({ categorySelected = "", setCategorySelected = () => {},
+setItemIdSelected = () => {}
+}) => {
 
   const [keyWord, setKeyword] = useState("")
   const [productsFiltered, setProductsFiltered] = useState([])
@@ -25,7 +27,7 @@ const ItemListCategory = ({ categorySelected = "", setCategorySelected = () => {
       <FlatList
         showsVerticalScrollIndicator={false}
         data={productsFiltered}
-        renderItem={({ item }) => <ProductItem product={item} />}
+        renderItem={({ item }) => <ProductItem product={item} setItemIdSelected = {setItemIdSelected } />}
         keyExtractor={(producto) => producto.id}
       />
     </View>
