@@ -3,8 +3,8 @@ import { colors } from "../constants/colors"
 import CategoryItem from "../components/CategoryItem"
 import categories from "../data/categories.json"
 
-const Home = ({setCategorySelected}) => {
-  
+const Home = ({ navigation }) => {
+
   return (
     <View style={styles.flatListContainer}>
       <FlatList
@@ -12,9 +12,9 @@ const Home = ({setCategorySelected}) => {
         keyExtractor={(elemntoDeMiArray) => elemntoDeMiArray}
         data={categories.sort()}
         renderItem={({ item }) => (
-          <CategoryItem 
-            selectCategory={setCategorySelected} 
-            category={item} 
+          <CategoryItem
+            navigation={navigation}
+            category={item}
           />
         )}
       />

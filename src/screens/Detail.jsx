@@ -9,12 +9,13 @@ import {
 import React, { useEffect, useState } from "react"
 import allProducts from "../data/products.json"
 
-const ItemDetail = ({ idSelected, setProductSelected }) => {
-  console.log(idSelected)
+const ItemDetail = ({ route, navigation}) => {
 
   const [product, setProduct] = useState(null)
   const [orientation, setOrientation] = useState("portrait")
   const { width, height } = useWindowDimensions()
+
+  const {productId: idSelected} = route.params
 
   //Landscape = horizontal
   //Portrait = vertical
@@ -37,7 +38,7 @@ const ItemDetail = ({ idSelected, setProductSelected }) => {
 
   return (
     <View>
-      <Button onPress={() => setProductSelected("")} title="Go back" />
+      <Button onPress={() => navigation.goBack()} title="Go back" />
       {product ? (
         <View
           style={
