@@ -2,6 +2,7 @@ import { FlatList, StyleSheet, View } from "react-native"
 import { colors } from "../constants/colors"
 import CategoryItem from "../components/CategoryItem"
 import categories from "../data/categories.json"
+import Counter from "../components/Counter"
 
 const Home = ({ navigation }) => {
 

@@ -50,7 +50,7 @@ const ItemDetail = ({ route, navigation}) => {
           <Image
             source={{ uri: product.images[0] }}
             style={orientation === "portrait" ? styles.image : styles.imageLandscape}
-            resizeMode="cover"
+            resizeMode="contain"
           />
           <View style={orientation === "portrait" ? styles.textContainer : styles.textContainerLandscape}>
             <Text>{product.title}</Text>
