@@ -4,6 +4,7 @@ import products from '../data/products.json'
 import { colors } from '../constants/colors'
 import { useState, useEffect } from 'react'
 import Search from '../components/Search'
+import { useGetProductsByCategoryQuery } from '../services/shopService'
 
 const ItemListCategory = ({
 setCategorySelected = () => {},
@@ -17,12 +18,18 @@ route
 
   const {category: categorySelected} = route.params 
 
+  const {data: productsFetched, error: errorFromFetch, isLoading} = useGetProductsByCategoryQuery(categorySelected)
+
   useEffect(() => {
-    const productsPrefiltered = products.filter(product => product.category === categorySelected)
-    const productsFilter = productsPrefiltered.filter(product => product.title.toLocaleLowerCase().includes(keyWord.toLocaleLowerCase()))
-    setProductsFiltered(productsFilter)
-    setError("")
-  }, [keyWord, categorySelected])
+    
+    if (!isLoading) {
+      const productsFilter = productsFetched.filter((product) =>
+        product.title.toLocaleLowerCase().includes(keyWord.toLocaleLowerCase())
+      )
+      setProductsFiltered(productsFilter)
+      setError("")
+    }
+  }, [keyWord, categorySelected, productsFetched, isLoading])
 
   return (
 
@@ -31,7 +38,8 @@ route
       <FlatList
         showsVerticalScrollIndicator={false}
         data={productsFiltered}
-        renderItem={({ item }) => <ProductItem product={item} navigation={navigation}/>}
+        renderItem={({ item }) => ( 
+        <ProductItem product={item} navigation={navigation}/>)}
         keyExtractor={(producto) => producto.id}
       />
     </View>

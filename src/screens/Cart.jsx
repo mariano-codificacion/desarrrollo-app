@@ -1,17 +1,17 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import CartData from '../data/cart.json'
 import CartItem from '../components/CartItem';
+import { useSelector } from 'react-redux';
 
 const Cart = () => {
-    console.log(CartData);
-    const total = CartData.reduce((acumulador, currentItem) => acumulador += currentItem.price * currentItem.quantity, 0)
-    
+
+    const {items: CartData, total} = useSelector(state => state.cart.value)
+
     return (
     <View style={styles.container}>
         <FlatList
             data={CartData}
-            keyExtractor={cartItem => cartItem.id}
+            keyExtractor={(cartItem) => cartItem.id}
             renderItem={({item})=> {
                 return (
                     <CartItem
@@ -21,7 +21,7 @@ const Cart = () => {
             }}
         />
         <View style={styles.totalContainer}>
-            <Pressable>
+            <Pressable onPress={() => {}}>
                 <Text>
                     Confirm
                 </Text>
