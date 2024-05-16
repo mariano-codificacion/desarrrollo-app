@@ -4,13 +4,14 @@ import React from "react"
 import CartItem from "../components/CartItem"
 import { useSelector } from "react-redux"
 import { usePostOrderMutation } from "../services/shopService"
+import { colors } from "../constants/colors"
 
 const Cart = () => {
     // console.log(CartData);
 
-    const {items: CartData, total} = useSelector(state => state.cart.value)
+    const { items: CartData, total } = useSelector(state => state.cart.value)
     const [triggerPostOrder, result] = usePostOrderMutation()
-    
+
 
     /* let total = 0
     for (const currentItem of CartData) {
@@ -28,7 +29,7 @@ const Cart = () => {
     } */
 
     const onConfirmOrder = () => {
-        triggerPostOrder({items: CartData, user: 'Mariano', total})
+        triggerPostOrder({ items: CartData, user: 'Mariano', total })
     }
 
     return (
@@ -41,10 +42,14 @@ const Cart = () => {
                 }}
             />
             <View style={styles.totalContainer}>
-                <Pressable onPress={onConfirmOrder}>
-                    <Text>Confirm</Text>
-                </Pressable>
-                <Text>Total: ${total}</Text>
+                <View>
+                    <Pressable onPress={onConfirmOrder}>
+                        <Text>Confirm Order</Text>
+                    </Pressable>
+                </View>
+                <View>
+                    <Text>Total: ${total}</Text>
+                </View>
             </View>
         </View>
     )
@@ -59,8 +64,10 @@ const styles = StyleSheet.create({
         marginBottom: 120,
     },
     totalContainer: {
-        flexDirection: "row",
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        margin: 40,
+        backgroundColor: colors.teal600
     },
 })
