@@ -2,9 +2,9 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { baseUrl } from "../databases/realtimeDatabase"
 
 export const shopApi = createApi({
-    reducerPath: "shopApi", 
+    reducerPath: "shopApi",
     baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
-    tagTypes: ['profileImageGet'], //Declare tags
+    tagTypes: ['profileImageGet', 'locationGet'], //Declare tags
     endpoints: (builder) => ({
         getCategories: builder.query({
             query: () => `categories.json`,
@@ -27,7 +27,7 @@ export const shopApi = createApi({
             },
         }),
         postOrder: builder.mutation({
-            query: ({...order}) => ({
+            query: ({ ...order }) => ({
                 url: 'orders.json',
                 method: 'POST',
                 body: order
@@ -39,7 +39,7 @@ export const shopApi = createApi({
         }),
         //We make a PUT request for not creating additional key, because de localId is already an unique key.
         postProfileImage: builder.mutation({
-            query: ({image, localId}) => ({
+            query: ({ image, localId }) => ({
                 url: `profileImages/${localId}.json`,
                 method: "PUT",
                 body: {
@@ -47,6 +47,23 @@ export const shopApi = createApi({
                 },
             }),
             invalidatesTags: ['profileImageGet'] //Invalidates will trigger a refetch on profileImageGet
+        }),
+        getLocation: builder.query({
+            query: (localId) => `locations/${localId}.json`,
+            providesTags: ['locationGet']
+        }),
+        postLocation: builder.mutation({
+            query: ({ location, localId }) => ({
+                url: `locations/${localId}.json`,
+                method: "PUT",
+                body: {
+                    latitude: location.latitude,
+                    longitude: location.longitude,
+                    address: location.address,
+                    updatedAt: location.updatedAt
+                },
+            }),
+            invalidatesTags: ['locationGet']
         }),
     }),
 })
@@ -58,4 +75,6 @@ export const {
     usePostOrderMutation,
     useGetProfileImageQuery,
     usePostProfileImageMutation,
+    useGetLocationQuery,
+    usePostLocationMutation
 } = shopApi
