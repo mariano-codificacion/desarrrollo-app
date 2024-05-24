@@ -29,17 +29,10 @@ const ItemDetail = ({ route, navigation}) => {
     if (width > height) setOrientation("landscape")
     else setOrientation("portrait")
   }, [width, height])
-/*
-  useEffect(() => {
-    //Encontrar el producto por su id
-    const productSelected = allProducts.find(
-      (product) => product.id === idSelected
-    )
-    setProduct(productSelected)
-  }, [idSelected])
-*/
+
   const handleAddCart = () => {
     dispatch(addCartItem({...product, quantity: 1}))
+    navigation.goBack()
   }
 
   return (
@@ -100,6 +93,7 @@ const styles = StyleSheet.create({
 
   textContainerLandscape: {
     width: '50%',
+    height: '100%',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'start',

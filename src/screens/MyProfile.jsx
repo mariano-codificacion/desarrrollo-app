@@ -4,7 +4,7 @@ import AddButton from "../components/AddButton";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetProfileImageQuery } from "../services/shopService";
 import { clearUser } from "../features/User/userSlice";
-
+import { truncateSessionsTable } from "../persistence"
 
 const MyProfile = ({ navigation }) => {
 
@@ -21,8 +21,13 @@ const MyProfile = ({ navigation }) => {
     const launchLocation = async () => {
         navigation.navigate('List Address')
     }
+
     const signOut = async () => {
-        dispatch(clearUser())
+        try {
+            const response = await truncateSessionsTable()
+            dispatch(clearUser())
+        } catch (error) {
+        }
     }
 
     const defaultImageRoute = "../../assets/images/defaultProfile.png"
@@ -46,7 +51,7 @@ const MyProfile = ({ navigation }) => {
                 "Modify profile picture"
                 : "Add profile picture"}
             />
-              <AddButton onPress={launchLocation} title="My address" />
+            <AddButton onPress={launchLocation} title="My address" />
             <AddButton onPress={signOut} title="Sign out" />
         </View>
     );

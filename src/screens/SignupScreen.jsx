@@ -8,12 +8,6 @@ import InputForm from "../components/inputForm";
 import { useSignUpMutation } from "../services/authService";
 import { setUser } from "../features/User/userSlice";
 import { signupSchema } from "../validations/authSchema";
-/* import { useSignUpMutation } from "../Services/authServices";
-import { setUser } from "../Features/User/userSlice";
-import { useSignUpMutation } from "../services/authService";
-import { useDispatch } from "react-redux";
-import { setUser } from "../features/auth/authSlice";
-import { signupSchema } from "../validations/singupSchema"; */
 
 const SignupScreen = ({ navigation }) => {
     const [email, setEmail] = useState("");
@@ -29,7 +23,6 @@ const SignupScreen = ({ navigation }) => {
 
     useEffect(()=> {
         if (result.isSuccess) {
-            console.log("🕵🏻 ~ useEffect ~ result:", result)
             dispatch(
                 setUser({
                     email: result.data.email,
@@ -47,9 +40,7 @@ const SignupScreen = ({ navigation }) => {
             const validation = signupSchema.validateSync({email, password, confirmPassword})
             triggerSignUp({email, password, returnSecureToken: true})
         } catch (err) {
-            console.log("Entro al signup del error");
-            console.log(err.path);
-            console.log(err.message);
+          
             switch (err.path) {
                 case "email":
                     setErrorMail(err.message)
@@ -62,32 +53,7 @@ const SignupScreen = ({ navigation }) => {
                     break;
             }
         }
-        /* try {
-            //Submit logic with validations
-            const isValidVariableEmail = isValidEmail(email)
-            const isCorrectPassword = isAtLeastSixCharacters(password)
-            const isRepeatedPasswordCorrect = password === confirmPassword
-
-            if (isValidVariableEmail && isCorrectPassword && isRepeatedPasswordCorrect) {
-                const request = {
-                    email,
-                    password,
-                    returnSecureToken: true
-                }
-                triggerSignUp(request)
-            }
-
-            if (!isValidVariableEmail) setErrorMail ('Email is not correct')
-            else setErrorMail('')
-            if (!isCorrectPassword) setErrorPassword ('Password must be at least 6 characters')
-            else setErrorPassword('')
-            if (!isRepeatedPasswordCorrect) setErrorConfirmPassword ('Passwords must match')
-            else setErrorConfirmPassword('')
-
-        } catch (err) {
-            console.log("Catch error");
-            console.log(err.message);
-        } */
+        
     };
 
     return (
@@ -138,16 +104,16 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 22,
-        fontFamily: "Josefin",
+       
     },
     sub: {
         fontSize: 14,
-        fontFamily: "Josefin",
+       
         color: "black",
     },
     subLink: {
         fontSize: 14,
-        fontFamily: "Josefin",
+      
         color: "blue",
     },
 });

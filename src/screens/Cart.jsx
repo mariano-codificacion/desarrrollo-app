@@ -1,35 +1,22 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native"
 import React from "react"
-// import CartData from "../data/cart.json"
 import CartItem from "../components/CartItem"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { usePostOrderMutation } from "../services/shopService"
 import { colors } from "../constants/colors"
+//import { clearCart } from "../features/Cart/cartSlice"
 
-const Cart = () => {
-    // console.log(CartData);
+const Cart = ({navigation}) => {
 
+    const { localId } = useSelector(state => state.auth.value)
     const { items: CartData, total } = useSelector(state => state.cart.value)
     const [triggerPostOrder, result] = usePostOrderMutation()
-
-
-    /* let total = 0
-    for (const currentItem of CartData) {
-        console.log(currentItem.id);
-        total += currentItem.price * currentItem.quantity
-    } */
-
-    /* onConfirm = () => {
-        triggerPost({
-            total,
-            items: cartItems,
-            user: "userLoggedId",
-            date: new Date().toLocaleString(),
-        })
-    } */
+    //const dispatch = useDispatch()
 
     const onConfirmOrder = () => {
-        triggerPostOrder({ items: CartData, user: 'Mariano', total })
+        triggerPostOrder({ items: CartData, user: localId, total })
+        navigation.navigate("Orders")
+        //dispatch(clearCart());
     }
 
     return (
@@ -42,14 +29,18 @@ const Cart = () => {
                 }}
             />
             <View style={styles.totalContainer}>
-                <View>
+                {total?(
                     <Pressable onPress={onConfirmOrder}>
-                        <Text>Confirm Order</Text>
+                        <Text style={styles.text}>Confirm Order</Text>
                     </Pressable>
-                </View>
-                <View>
-                    <Text>Total: ${total}</Text>
-                </View>
+                ):(
+                    <>
+                    </>
+                )
+                }
+            </View>
+            < View style={styles.total}>
+                <Text style={styles.text}>Total: ${total}</Text>
             </View>
         </View>
     )
@@ -67,7 +58,18 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        margin: 40,
+        margin: 10,
         backgroundColor: colors.teal600
+    },
+    total: {
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        margin: 10,
+        fontSize: 30,
+        backgroundColor: colors.teal900
+    },
+    text: {
+        fontSize: 20,
     },
 })

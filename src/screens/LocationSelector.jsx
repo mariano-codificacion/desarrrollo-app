@@ -41,14 +41,14 @@ const LocationSelector = ({ navigation }) => {
     
                 if (status === "granted") {
                     let location = await Location.getCurrentPositionAsync({})
-                    console.log(location)
+                  
                     setLocation({
                         latitude: location.coords.latitude,
                         longitude: location.coords.longitude
                     })
                 }
             } catch (error) {
-                console.log(error);
+               
             }
         })()
 
@@ -63,7 +63,6 @@ const LocationSelector = ({ navigation }) => {
                     const url_reverse_geocode = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.latitude},${location.longitude}&key=${googleMapsApiKey}`;
                     const response = await fetch(url_reverse_geocode);
                     const data = await response.json();
-                    console.dir(data);
                     setAddress(data.results[0].formatted_address);
                 }
             } catch (error) {
@@ -77,7 +76,7 @@ const LocationSelector = ({ navigation }) => {
             <Text
                 style = {styles.text}
             >My Address</Text>
-            {/* Flatlist con las directions */}
+           
             {location ? (
                 <>
                     <Text 
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
     },
     text: {
         paddingTop: 20,
-        fontFamily: 'Josefin',
+       
         fontSize: 18
     },
     noLocationContainer: {

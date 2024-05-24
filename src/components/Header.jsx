@@ -28,12 +28,10 @@ const styles = StyleSheet.create({
   },
   text: {
     color: colors.teal200,
-    fontFamily: 'Josefin',
     fontSize: 22
   },
   textSm: {
     color: colors.teal200,
-    fontFamily: 'Josefin',
     fontSize: 18
   }
 })
