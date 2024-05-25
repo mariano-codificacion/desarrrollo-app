@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 import OrderItem from '../components/OrderItem'
 import { useGetOrdersQuery } from '../services/shopService'
 import { useSelector } from 'react-redux'
+import ShopLayout from "../components/ShopLayout"
 
 const OrderScreen = () => {
 
@@ -19,6 +20,7 @@ const OrderScreen = () => {
   }, [orders, isSuccess, localId])
 
   return (
+    <ShopLayout>
     <View>
         <FlatList
             data={ordersFiltered}
@@ -31,6 +33,7 @@ const OrderScreen = () => {
             }}
         />
     </View>
+    </ShopLayout>
   )
 }
 

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetProfileImageQuery } from "../services/shopService";
 import { clearUser } from "../features/User/userSlice";
 import { truncateSessionsTable } from "../persistence"
+import ShopLayout from "../components/ShopLayout"
 
 const MyProfile = ({ navigation }) => {
 
@@ -33,6 +34,7 @@ const MyProfile = ({ navigation }) => {
     const defaultImageRoute = "../../assets/images/defaultProfile.png"
 
     return (
+        <ShopLayout>
         <View style={styles.container}>
             {imageFromBase || imageCamera ? (
                 <Image
@@ -54,6 +56,7 @@ const MyProfile = ({ navigation }) => {
             <AddButton onPress={launchLocation} title="My address" />
             <AddButton onPress={signOut} title="Sign out" />
         </View>
+        </ShopLayout>
     );
 };
 

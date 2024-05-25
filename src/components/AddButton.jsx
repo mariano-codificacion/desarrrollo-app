@@ -5,7 +5,7 @@ import { colors } from "../constants/colors";
 const AddButton = ({
     title = "",
     onPress = () => {},
-    color = colors.teal600,
+    color = colors.teal300,
 }) => {
     return (
         <Pressable
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     button: {
         width: "80%",
         borderWidth: 1,
-        backgroundColor: colors.teal600,
+        backgroundColor: colors.teal400,
         justifyContent: "center",
         alignItems: "center",
         padding: 8

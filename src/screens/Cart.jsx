@@ -4,9 +4,9 @@ import CartItem from "../components/CartItem"
 import { useDispatch, useSelector } from "react-redux"
 import { usePostOrderMutation } from "../services/shopService"
 import { colors } from "../constants/colors"
-//import { clearCart } from "../features/Cart/cartSlice"
+import ShopLayout from "../components/ShopLayout"
 
-const Cart = ({navigation}) => {
+const Cart = ({ navigation }) => {
 
     const { localId } = useSelector(state => state.auth.value)
     const { items: CartData, total } = useSelector(state => state.cart.value)
@@ -20,29 +20,31 @@ const Cart = ({navigation}) => {
     }
 
     return (
-        <View style={styles.container}>
-            <FlatList
-                data={CartData}
-                keyExtractor={(pepe) => pepe.id}
-                renderItem={({ item }) => {
-                    return <CartItem cartItem={item} />
-                }}
-            />
-            <View style={styles.totalContainer}>
-                {total?(
-                    <Pressable onPress={onConfirmOrder}>
-                        <Text style={styles.text}>Confirm Order</Text>
-                    </Pressable>
-                ):(
-                    <>
-                    </>
-                )
-                }
+        <ShopLayout>
+            <View style={styles.container}>
+                <FlatList
+                    data={CartData}
+                    keyExtractor={(pepe) => pepe.id}
+                    renderItem={({ item }) => {
+                        return <CartItem cartItem={item} />
+                    }}
+                />
+                <View style={styles.totalContainer}>
+                    {total ? (
+                        <Pressable onPress={onConfirmOrder}>
+                            <Text style={styles.text}>Confirm Order</Text>
+                        </Pressable>
+                    ) : (
+                        <>
+                        </>
+                    )
+                    }
+                </View>
+                < View style={styles.total}>
+                    <Text style={styles.text}>Total: ${total}</Text>
+                </View>
             </View>
-            < View style={styles.total}>
-                <Text style={styles.text}>Total: ${total}</Text>
-            </View>
-        </View>
+        </ShopLayout>
     )
 }
 
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         margin: 10,
-        backgroundColor: colors.teal600
+        backgroundColor: colors.teal100
     },
     total: {
         flexDirection: "column",

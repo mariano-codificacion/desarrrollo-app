@@ -6,7 +6,7 @@ import authReducer from "../features/User/userSlice"
 import { shopApi } from "../services/shopService"
 import { setupListeners } from "@reduxjs/toolkit/query"
 import { authApi } from "../services/authService"
-
+import globalReducer from "../features/Global/globalSlice"
 
 const store = configureStore({
     reducer: {
@@ -14,6 +14,7 @@ const store = configureStore({
         shop: reductorDelShop,
         cart: cartReducer,
         auth: authReducer,
+        global: globalReducer,
         [shopApi.reducerPath]: shopApi.reducer,
         [authApi.reducerPath]: authApi.reducer,
     },
