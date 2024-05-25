@@ -16,14 +16,15 @@ export default Card
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.teal400,
-    width: 250,
-    height: 40,
+    width: 200,
+    height: 100,
+    borderRadius: 50,
     shadowColor: colors.platinum,
     shadowOffset: {
       width: 4,
       height: 4,
     },
-    shadowOpacity: 0.30,
+    shadowOpacity: 0.50,
     shadowRadius: 4.65,
     elevation: 4,
     marginRight: 10,

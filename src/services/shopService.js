@@ -4,10 +4,11 @@ import { baseUrl } from "../databases/realtimeDatabase"
 export const shopApi = createApi({
     reducerPath: "shopApi",
     baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
-    tagTypes: ['profileImageGet', 'locationGet', 'getOrders'], //Declare tags
+    tagTypes: ['getCategories','profileImageGet', 'locationGet', 'getOrders'], //Declare tags
     endpoints: (builder) => ({
         getCategories: builder.query({
             query: () => `categories.json`,
+            providesTags: ['getCategories']
         }),
         getProductsByCategory: builder.query({
             query: (category) =>
